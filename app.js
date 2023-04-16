@@ -1,38 +1,29 @@
-const express = require('express');
- // express app
+const express = require("express");
+// express app
 
- const app = express();
+const app = express();
 
- // register view engine 
+// register view engine
 
- app.set('view engine', 'ejs');
- 
- // Listen for request
+app.set("view engine", "ejs");
 
- app.listen(3001);
+// Listen for request
 
- app.get('/', (req,res) => {
-//  res.send('<p>home page</p>');
+app.listen(3001);
 
-res.sendFile('./views/index.html', { root: __dirname})
- // Routing and html
- });
-
- app.get('/about', (req,res) => {
-    // res.send('<p>about page</p>');
-    // Routing and html
-    res.sendFile('./views/about.html', { root: __dirname})
+app.get("/", (req, res) => {
+  res.render("index");
 });
 
-app.get('/about-us', (req,res) => {
-    // res.send('<p>about page</p>');
-    // Routing and html
-    res.redirect('/about');
-    res.sendFile('./views/about.html', { root: __dirname})
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+app.get("/blogs/create", (req, res) => {
+  res.render("create");
 });
 
 // 404 page
-app.use((req,res) => {
-    res.sendFile('./views/404.html', { root: __dirname})
-})
-
+app.use((req, res) => { 
+  res.status(404).render("404");
+});
